@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Layout from "../Layout/Layout";
-import Home from "../Pages/Home";
-import ProductAdd from "../Pages/ProductAdd";
-import ProductEdit from "../Pages/ProductEdit";
+import Layout from "../layout/Layout";
+import Home from "../pages/Home";
+import ProductAdd from "../pages/ProductAdd";
+import ProductEdit from "../pages/ProductEdit";
 
 const Paths = () =>{
 

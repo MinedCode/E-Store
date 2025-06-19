@@ -1,23 +1,8 @@
-# 📦 E-Store
+# React + Vite
 
-**E-Store** é um sistema gerenciador de produtos desenvolvido com **React.js**, voltado para a administração de estoques em estabelecimentos comerciais. O sistema permite cadastrar, listar, editar e remover produtos de maneira simples e eficiente.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
----
+Currently, two official plugins are available:
 
-## 🚀 Funcionalidades
-
-- ✅ Listar todos os produtos cadastrados  
-- ➕ Adicionar novos produtos  
-- ✏️ Editar informações de produtos existentes  
-- 🗑️ Remover produtos do estoque  
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-- [React.js](https://reactjs.org/)
-- JavaScript (ES6+)
-- HTML e CSS
-- `fetch` API para requisições HTTP
-- API de teste (ex: JSON Server)
-
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
