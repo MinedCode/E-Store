@@ -7,10 +7,11 @@
 }
 
 body{
-    background-color: #1e1e1e;
+    background-color: #00000e;
 }
 
 #outlet{
+    color: white;
     padding-top: 10px;
     padding-left: 260px;
 }
