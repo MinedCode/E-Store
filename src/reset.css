@@ -13,5 +13,6 @@ body{
 #outlet{
     color: white;
     padding-top: 10px;
-    padding-left: 260px;
+    padding-left: 280px;
+    padding-right: 40px;
 }
