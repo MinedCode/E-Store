@@ -2,7 +2,10 @@ const Home = () =>{
 
     return(
         <>
-            <h1>espaço destinado a homepage</h1>
+            <div id="outlet">
+                <h1>espaço destinado a homepage</h1>
+            </div>
+            
         </>
     );
 };

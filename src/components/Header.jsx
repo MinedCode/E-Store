@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import accountPhoto from "../assets/accountPhoto.png"
+import accountPhoto from "../assets/extras/accountPhoto.png"
 
 const HeaderComponent = styled.div`
     background-color: #1F2937;
@@ -29,6 +29,7 @@ const HeaderComponent = styled.div`
             background-color: #39414C;
             height: 35px;
             width: 25%;
+            margin-left: 20px;
             padding: 0 10px;
             border-radius: 10px;
 
