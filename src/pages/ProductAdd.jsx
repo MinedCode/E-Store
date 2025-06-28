@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import uploadImage from "../assets/extras/upload.png";
 import { Link } from "react-router-dom";
+import { useRef, useState} from "react";
 
 const ProductAddComponent = styled.div`
     display: flex;
@@ -42,7 +43,6 @@ const ProductAddComponent = styled.div`
             & #uploadImageArea{
                 background-color: #39414C;
                 margin-top: 10px;
-                padding-bottom: 10px;
                 border-radius: 10px;
                 height: 200px;
                 display: flex;
@@ -52,18 +52,27 @@ const ProductAddComponent = styled.div`
 
             }
 
+            & #uploadImageArea:hover{
+                cursor: pointer;
+            }
+
             & #infoProduto{
                 margin-top: 10px;
                 display: grid;
-                grid-template-columns: 50% 50%;
+                justify-content: space-between;
+                grid-template-columns: 49% 49%;
                 
                 & div{
                     display: flex;
                     flex-direction: column;
+                    gap: 5px;
+
+                    & label{
+                        margin-top: 10px;
+                    }
 
                     & .info{
                         all: unset;
-                        margin-left: 5px;
                         padding-left: 10px;
                         height: 35px;
                         border-radius: 10px;
@@ -71,15 +80,54 @@ const ProductAddComponent = styled.div`
                         display: flex;
                         justify-content: center;
                         align-items: center;
+
+                        color: #d1d1d1;
                     }
                 }
                 
+            }
+
+
+
+            & #desc{
+                display: flex;
+                flex-direction: column;
+                margin-top: 10px;
+            
+                & textarea{
+                    all: unset;
+                    width: auto;
+                    height: 120px;
+                    margin-top: 5px;
+                    padding: 2px 0 2px 5px;
+                    border-radius: 10px;
+                    white-space: pre-wrap;
+                    word-wrap: break-word;
+                    background-color: #39414C;
+
+                    color: #d1d1d1;
+                }
             }
         }
     }
 `;
 
 const ProductAdd = () =>{
+
+    const inputRef = useRef(null)
+    const [preview, setPreview] = useState(null);
+
+    const imageClick = () =>{
+        inputRef.current.click();
+    }
+
+    const fileChange = (e) =>{
+        const file = e.target.files[0];
+            
+        if(file){
+            setPreview(URL.createObjectURL(file));
+        }
+    }
 
     return(
 
@@ -96,10 +144,35 @@ const ProductAdd = () =>{
             <div id="containerBottom">
                 <form>
                     <label>Imagem do produto</label>
-                    <div id="uploadImageArea">
-                        <img src={uploadImage} alt="upload image" />
-                        <p>Clique para enviar</p>
+                    <div id="uploadImageArea" onClick={imageClick}>
+                        {preview ? (
+                            <img
+                                src={preview}
+                                alt="Imagem selecionada"
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    borderRadius: "10px"
+                                }}
+                            />
+                        ):(
+                            <>
+                                <img src={uploadImage} alt="upload image" />
+                                <p>Clique para enviar</p>
+                            </>
+
+                        )}
+                        
                     </div>
+
+                    <input 
+                        type="file" 
+                        accept="image/*"
+                        ref={inputRef}
+                        onChange={fileChange}
+                        style={{display: "none"}}
+                    />
 
                     <div id="infoProduto">
                         <div>
@@ -120,15 +193,20 @@ const ProductAdd = () =>{
                         
                         <div>
                             <label htmlFor="price">Preço (R$)</label>
-                            <input type="number" id="price" placeholder="0,00" className="info"/>
+                            <input type="number" id="price" placeholder="1,00" min="1.00" className="info"/>
                         </div>
                         
                         <div>
                             <label htmlFor="stock">Quantidade em estoque</label>
-                            <input type="number" id="stock" className="info"/>
+                            <input type="number" id="stock" placeholder="0" className="info"/>
                         </div>
-
                     </div>
+
+                    <div id="desc">
+                        <label htmlFor="">Digite a descrição do produto</label>
+                        <textarea placeholder="Digite a descrição do produto..."></textarea>
+                    </div>
+
                 </form>
             </div>
         </ProductAddComponent>
