@@ -205,13 +205,22 @@ const DashboardComponent = styled.div`
 
 const Home = () =>{
     const [produtos, setProdutos] = useState([]);
-    const [count, setCount] = useState(0);
-    
+    const [totalProdutos, setTotalProdutos] = useState(0);
+
     async function buscarDados() {
-        const require = await fetch(`https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos`);
-        const dados = await require.json();
-        console.log(dados.length)
-        setProdutos(dados);    
+        const request = await fetch(`https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos`);
+        const dados = await request.json();
+        setTotalProdutos(dados.length);
+
+        if(dados.length >= 4){
+            for(let i = 1; i<=4; i++){
+                console.log(i);
+                setProdutos(newProduto => [...newProduto, dados[dados.length-i]]);
+            }
+        }else{
+            setProdutos(dados)
+        }
+
     }
 
     useEffect(() =>{
@@ -226,7 +235,7 @@ const Home = () =>{
                     <div className="dados">
                         <img src={produtosImage} alt="" />
                         <p>Total de Produtos:</p>
-                        <h2>0</h2>
+                        <h2>{totalProdutos}</h2>
                     </div>
                     
                     <div className="dados">
@@ -244,7 +253,7 @@ const Home = () =>{
 
                 <div id="containerBottom">
                     <div id="cabecalho">
-                        <h4>Produtos</h4>
+                        <h4>Produtos adicionados recentemente</h4>
                         <Link id="addProduto" to="/productadd">+ Novo Produto</Link>
                     </div>
 
