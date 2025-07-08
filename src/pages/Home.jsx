@@ -75,9 +75,9 @@ const DashboardComponent = styled.div`
 
         & #produtos{
             display: grid;
-            grid-template-columns: 260px 260px 260px 260px;
+            grid-template-columns: 23% 23% 23% 23%;
             flex-wrap: wrap;
-            height: 300px;
+            height: 40vh;
             align-items: center;
             justify-content: space-around;
             border-top: 1px solid #c7c7c7;
@@ -85,7 +85,7 @@ const DashboardComponent = styled.div`
 
             & .produto{
                 height: 250px;
-                width: 260px;
+                width: 100%;
                 border-radius: 10px;
                 border:1px solid #c7c7c7;
                 display: flex;
