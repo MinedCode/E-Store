@@ -76,6 +76,7 @@ const DashboardComponent = styled.div`
         & #produtos{
             display: grid;
             grid-template-columns: 23% 23% 23% 23%;
+            grid-template-rows: 100%;
             flex-wrap: wrap;
             height: 40vh;
             align-items: center;
@@ -84,7 +85,7 @@ const DashboardComponent = styled.div`
             border-bottom: 1px solid #c7c7c7;
 
             & .produto{
-                height: 250px;
+                height: 85%;
                 width: 100%;
                 border-radius: 10px;
                 border:1px solid #c7c7c7;
@@ -158,8 +159,8 @@ const DashboardComponent = styled.div`
             & .produto:hover{
                 cursor: pointer;
                 transition: 200ms;
-                height: 255px;
-                width: 265px;
+                height: 90%;
+                width: 105%;
 
                 & h1{
                     transition: 200ms;
