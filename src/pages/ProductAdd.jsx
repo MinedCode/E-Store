@@ -97,7 +97,7 @@ const ProductAddComponent = styled.div`
                 & textarea{
                     all: unset;
                     width: auto;
-                    height: 120px;
+                    height: 90px;
                     margin-top: 5px;
                     padding: 2px 0 2px 5px;
                     border-radius: 10px;
@@ -108,6 +108,31 @@ const ProductAddComponent = styled.div`
                     color: #d1d1d1;
                 }
             }
+
+            & #botao{
+                display: flex;
+                justify-content: end;
+                align-items: center;
+                height: 45px;
+
+                & button{
+                    all: unset;
+                    height: 30px;
+                    width: 170px;
+                    background-color: #3B82F6;
+                    border-radius: 10px;
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                & button:hover{
+                    cursor: pointer;
+                    color: #c7c7c7;
+                    background-color: #2e5fad;
+                }
+            }
         }
     }
 `;
@@ -116,17 +141,71 @@ const ProductAdd = () =>{
 
     const inputRef = useRef(null)
     const [preview, setPreview] = useState(null);
+    
+    const [form, setForm] = useState({
+        imagem: null,
+        nome: "",
+        preco: "",
+        descricao: "",
+        categoria: "",
+        estoque: ""     
+    });
+
+    const mudarValor = (e) =>{
+        const {name, value, type, files} = e.target;
+        
+        if(type === "file"){
+            const file = files[0];
+
+            if(file){
+                setPreview(URL.createObjectURL(file));
+                setForm((prev) => ({...prev, [name]: file }));
+            }
+        }else{
+            setForm((prev) => ({...prev, [name]: value }));
+        }
+    }
 
     const imageClick = () =>{
         inputRef.current.click();
     }
 
-    const fileChange = (e) =>{
-        const file = e.target.files[0];
-            
-        if(file){
-            setPreview(URL.createObjectURL(file));
-        }
+    async function addProduto(){
+        try{
+            const formData = new FormData();
+            formData.append("file", form.imagem);
+            formData.append("upload_preset", "e-store_presets");
+
+            const response = await fetch("https://api.cloudinary.com/v1_1/dqrtfv8rr/image/upload", {
+                method: "POST",
+                body: formData
+            });
+
+            const dados = await response.json();
+            const urlImage = dados.secure_url;
+
+            const novoProduto ={
+                imagem: urlImage,
+                nome: form.nome,
+                preco: form.preco,
+                descricao: form.descricao,
+                categoria: form.categoria,
+                estoque: form.estoque
+            };
+
+            await fetch("https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(novoProduto)
+            });
+
+            alert("Produto salvo com êxito");
+            window.location.reload();
+
+        }catch (err){
+            console.log("erro ao salvar os dados: " + err)
+        }    
+
     }
 
     return(
@@ -169,21 +248,31 @@ const ProductAdd = () =>{
                     <input 
                         type="file" 
                         accept="image/*"
+                        name="imagem"
                         ref={inputRef}
-                        onChange={fileChange}
+                        onChange={mudarValor}
                         style={{display: "none"}}
+                        required
                     />
 
                     <div id="infoProduto">
                         <div>
                             <label htmlFor="name">Nome do produto</label>
-                            <input type="text" id="name" placeholder="Digite o nome do produto" className="info"/>
+                            <input 
+                                type="text"
+                                name="nome"
+                                id="name" 
+                                placeholder="Digite o nome do produto" 
+                                className="info" 
+                                onChange={mudarValor}
+                                required
+                            />
                         </div>
                         
                         <div>
                             <label htmlFor="category">Categoria</label>
-                            <select id="category" className="info">
-                                <option value="null" checked>Selecione uma categoria</option>
+                            <select id="category" className="info" name="categoria" required onChange={mudarValor}>
+                                <option value="null">Selecione uma categoria</option>
                                 <option value="Video-game">Video game</option>
                                 <option value="Pc-gamer">Pc gamer</option>
                                 <option value="Setup">Setup</option>
@@ -193,20 +282,41 @@ const ProductAdd = () =>{
                         
                         <div>
                             <label htmlFor="price">Preço (R$)</label>
-                            <input type="number" id="price" placeholder="1,00" min="1.00" className="info"/>
+                            <input 
+                                type="number" 
+                                name="preco"
+                                id="price" 
+                                placeholder="1,00" 
+                                min="1.00" 
+                                className="info" 
+                                onChange={mudarValor}    
+                                required
+                            />
                         </div>
                         
                         <div>
                             <label htmlFor="stock">Quantidade em estoque</label>
-                            <input type="number" id="stock" placeholder="0" className="info"/>
+                            <input 
+                                type="number" 
+                                name="estoque"
+                                id="stock" 
+                                placeholder="0" 
+                                className="info" 
+                                onChange={mudarValor}    
+                                required
+                            />
                         </div>
                     </div>
 
                     <div id="desc">
                         <label htmlFor="">Digite a descrição do produto</label>
-                        <textarea placeholder="Digite a descrição do produto..."></textarea>
+                        <textarea placeholder="Digite a descrição do produto..." name="descricao" onChange={mudarValor} required></textarea>
                     </div>
 
+                    <div id="botao">
+                        <button type="button" onClick={addProduto}>Salvar Produto</button>
+                    </div>
+                    
                 </form>
             </div>
         </ProductAddComponent>
