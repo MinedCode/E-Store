@@ -15,7 +15,7 @@ const Paths = () =>{
                     <Route path="/" element={<Layout/>}>
                         <Route path="/" element={<Home/>}/>
                         <Route path="/productadd" element={<ProductAdd/>}/>
-                        <Route path="/productedit" element={<ProductEdit/>}/>
+                        <Route path="/productedit/:id" element={<ProductEdit/>}/>
                         <Route path="/*" element={<NotFound/>}/>
                     </Route>
                 </Routes>
