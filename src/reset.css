@@ -4,6 +4,7 @@
     font-family: "Inter";
     text-decoration: none;
     list-style: none;
+    box-sizing: border-box;
 }
 
 body{
@@ -14,6 +15,27 @@ body{
 #outlet{
     color: white;
     padding-top: 10px;
-    padding-left: 280px;
-    padding-right: 40px;
+    padding-left: 230px; 
+    transition: padding-left 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    #outlet.menu-closed-mobile {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (min-width: 769px) {
+    #outlet {
+        padding-left: 230px; 
+        padding-right: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    #outlet {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 }

@@ -11,49 +11,74 @@ const MenuComponent = styled.div`
     left: 0;
     width: 200px;
     padding: 20px;
-    height: calc(100vh - 60px);
     border-right: 1px solid #d9d9d9;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
 
-    & ul{
+    & ul {
+        margin-top: 50px;
         display: flex;
         flex-direction: column;
         gap: 15px;
-        
-        & .navMenu{
+
+        & .navMenu {
             padding-left: 20px;
             height: 35px;
             display: flex;
             align-items: center;
             justify-content: start;
             gap: 10px;
-
             color: white;
             font-size: medium;
             font-weight: 400;
-        
-            & img{
+
+            & img {
                 width: 25px;
             }
         }
 
-        & .navMenu:hover{
+        & .navMenu:hover {
             background-color: #39414C;
             border-radius: 10px;
             transition: 300ms;
         }
     }
+
+    @media (max-width: 768px) {
+        transform: translateX(${props => (props.$isOpen ? '0' : '-100%')});
+        width: 250px;
+        top: 60px;
+        left: 0;
+        height: calc(100vh - 60px);
+        border-right: 1px solid #d9d9d9;
+        padding-top: 20px;
+
+        ${props => !props.$isOpen && `
+            pointer-events: none;
+        `}
+    }
+
+    @media (min-width: 769px) {
+        transform: translateX(0);
+        position: fixed;
+        left: 0;
+        top: 0;
+        padding-top: 80px;
+        height: 100vh;
+        width: 200px;
+    }
 `;
 
-const Menu = () =>{
-    return(
-        <MenuComponent>
+const Menu = ({ isOpen }) => {
+    return (
+        <MenuComponent $isOpen={isOpen}>
             <ul>
                 <Link className="navMenu" to="/"><img src={dashboard} alt="Dashborad image" />Dashboard</Link>
-                <Link className="navMenu" to="/products"><img src={produtos} alt="produto image" />Produtos</Link>
-                <Link className="navMenu"><img src={carrinho} alt="carrinho image" />Pedidos</Link>
+                <Link className="navMenu" to="/products" to="/products"><img src={produtos} alt="produto image" />Produtos</Link>
+                <Link className="navMenu" to="/orders"><img src={carrinho} alt="carrinho image" />Pedidos</Link>
             </ul>
         </MenuComponent>
     );
-}
+};
 
 export default Menu;

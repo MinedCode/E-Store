@@ -19,6 +19,10 @@ const ModalBox = styled.div`
   width: 400px;
   text-align: center;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
+
+  @media screen and (max-width: 1020px){
+    width: 350px;
+  }
 `;
 
 const Icon = styled(FaExclamationTriangle)`

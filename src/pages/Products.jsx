@@ -43,56 +43,63 @@ const ProductsComponent = styled.div`
                 border-top-right-radius: 10px;
             }
 
-        & h1 {
-          padding-left: 5px;
-          transition: 200ms;
-          font-size: 100%;
+            & h1 {
+                padding-left: 5px;
+                transition: 200ms;
+                font-size: 100%;
+            }
+
+            & p {
+                padding-left: 5px;
+                transition: 200ms;
+                font-size: 100%;
+                color: #c7c7c7;
+            }
+
+            & .botoes {
+                padding: 0 5px;
+                display: flex;
+                justify-content: space-between;
+
+                & .editar {
+                    background-color: #39414c;
+                    width: 65%;
+                    height: 30px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 10px;
+                    color: white;
+                    transition: 200ms;
+                }
+
+                & .editar:hover {
+                    background-color: #4a525e;
+                }
+
+                & .remover {
+                    background-color: #973e3e;
+                    width: 30%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    border-radius: 10px;
+                    transition: 200ms;
+                }
+
+                & .remover:hover {
+                    background-color: #be5252;
+                    cursor: pointer;
+                }
+            }
         }
+    }
 
-        & p {
-          padding-left: 5px;
-          transition: 200ms;
-          font-size: 100%;
-          color: #c7c7c7;
-        }
-
-        & .botoes {
-          padding: 0 5px;
-          display: flex;
-          justify-content: space-between;
-
-          & .editar {
-            background-color: #39414c;
-            width: 65%;
-            height: 30px;
+    @media screen and (max-width: 1020px) {
+        
+        & #container{
             display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 10px;
-            color: white;
-            transition: 200ms;
-          }
-
-          & .editar:hover {
-            background-color: #4a525e;
-          }
-
-          & .remover {
-            background-color: #973e3e;
-            width: 30%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            border-radius: 10px;
-            transition: 200ms;
-          }
-
-          & .remover:hover {
-            background-color: #be5252;
-            cursor: pointer;
-          }
-        }
         }
     }
 `;
