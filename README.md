@@ -29,7 +29,7 @@
   <table>
     <tr>
       <td align="center">
-        <a href="https://github.com/Diogoalves-dev" >
+        <a href="https://"github.com/Diogoalves-dev" >
           <img src="[https://avatars.githubusercontent.com/u/111232477?v=4](https://avatars.githubusercontent.com/u/153462940?v=4)" alt="Diogo Alves"
             width="100px" >
           <br>
@@ -38,7 +38,7 @@
       </td>
       <td align="center">
         <a href="https://github.com/heliowesley1">
-          <img src="[https://avatars.githubusercontent.com/u/203657092?v=4](https://avatars.githubusercontent.com/u/174755877?v=4)" alt="Hélio Wesley"
+          <img src="https://avatars.githubusercontent.com/u/174755877?v=4" alt="Hélio Wesley"
             width="100px" />
           <br />
           <sub><b>Hélio Wesley</b></sub>
