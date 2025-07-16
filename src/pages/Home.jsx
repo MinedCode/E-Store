@@ -71,27 +71,28 @@ const DashboardComponent = styled.div`
       }
     }
 
-    & #produtos {
-      display: grid;
-      grid-template-columns: 260px 260px 260px 260px;
-      flex-wrap: wrap;
-      height: 300px;
-      align-items: center;
-      justify-content: space-around;
-      border-top: 1px solid #c7c7c7;
-      border-bottom: 1px solid #c7c7c7;
+        & #produtos{
+            display: grid;
+            grid-template-columns: 23% 23% 23% 23%;
+            grid-template-rows: 100%;
+            flex-wrap: wrap;
+            height: 40vh;
+            align-items: center;
+            justify-content: space-around;
+            border-top: 1px solid #c7c7c7;
+            border-bottom: 1px solid #c7c7c7;
 
-      & .produto {
-        height: 85%;
-        width: 100%;
-        border-radius: 10px;
-        border: 1px solid #c7c7c7;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding-bottom: 10px;
-        gap: 10px;
-        transition: 200ms;
+            & .produto{
+                height: 85%;
+                width: 100%;
+                border-radius: 10px;
+                border:1px solid #c7c7c7;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding-bottom: 10px;
+                gap: 10px;
+                transition: 200ms;
 
         & img {
           width: 100%;
@@ -147,22 +148,28 @@ const DashboardComponent = styled.div`
 
           & .remover:hover {
             background-color: #be5252;
+            cursor: pointer;
           }
         }
       }
 
-      & .produto:hover {
-        cursor: pointer;
-        transition: 200ms;
-        height: 90%;
-        width: 105%;
+            & .produto:hover{
+                cursor: pointer;
+                transition: 200ms;
+                height: 90%;
+                width: 105%;
 
-        & h1,
-        & p {
-          font-size: 110%;
+                & h1{
+                    transition: 200ms;
+                    font-size: 110%;
+                }
+
+                & p{
+                    transition: 200ms;
+                    font-size: 110%;
+                }
+            }
         }
-      }
-    }
 
     & #pageProdutoContainer {
       display: flex;
