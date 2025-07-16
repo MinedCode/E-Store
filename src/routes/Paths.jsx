@@ -3,6 +3,9 @@ import Layout from "../layout/Layout";
 import Home from "../pages/Home";
 import ProductAdd from "../pages/ProductAdd";
 import ProductEdit from "../pages/ProductEdit";
+import NotFound from "../pages/NotFound";
+import Products from "../pages/Products";
+
 
 const Paths = () =>{
 
@@ -11,11 +14,13 @@ const Paths = () =>{
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Layout/>}>
+                    <Route element={<Layout/>}>
                         <Route path="/" element={<Home/>}/>
                         <Route path="/productadd" element={<ProductAdd/>}/>
-                        <Route path="/productedit" element={<ProductEdit/>}/>
+                        <Route path="/productedit/:id" element={<ProductEdit/>}/>
+                        <Route path="/products" element={<Products/>}/>
                     </Route>
+                    <Route path="/*" element={<NotFound/>}/>
                 </Routes>
             </BrowserRouter>
         </>
