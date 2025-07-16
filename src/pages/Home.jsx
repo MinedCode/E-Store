@@ -49,6 +49,7 @@ const DashboardComponent = styled.div`
         gap: 40px;
         border-radius: 10px;
         justify-content: space-between;
+        margin-bottom: 30px;
         
         #cabecalho {
             padding: 30px;
@@ -89,16 +90,15 @@ const DashboardComponent = styled.div`
             border-bottom: 1px solid #c7c7c7;
 
             .produto {
-                height: 85%;
+                height: 90%;
                 width: 20%;
                 border-radius: 10px;
                 border:1px solid #c7c7c7;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
+                justify-content: space-around;
                 padding-bottom: 10px;
                 margin: 10px;
-                gap: 10px;
                 transition: 200ms;
 
                 img {
@@ -158,6 +158,14 @@ const DashboardComponent = styled.div`
                     .remover:hover {
                         background-color: #be5252;
                         transition: 200ms;
+                    }
+                }
+
+                @media screen and (max-width: 1020px) {
+                    p{
+                        margin-bottom: 10px;
+                        display: flex;
+                        justify-content: center;
                     }
                 }
             }

@@ -34,7 +34,8 @@ const ComponentEdit = styled.div`
 
     & #containerBottom{
         background-color: #1F2937;
-        height: 70vh;
+        height: auto;
+        margin-bottom: 30px;
         border-radius: 10px;
         padding: 20px;
 
@@ -236,7 +237,7 @@ const ProductEdit = () =>{
 
     return(
 
-        <ComponentEdit id="outlet">
+        <ComponentEdit>
             <div id="containerTop">
                 <div>
                     <h1>Editar Produto</h1>
