@@ -30,7 +30,7 @@
     <tr>
       <td align="center">
         <a href="https://"github.com/Diogoalves-dev" >
-          <img src="[https://avatars.githubusercontent.com/u/111232477?v=4](https://avatars.githubusercontent.com/u/153462940?v=4)" alt="Diogo Alves"
+          <img src="https://avatars.githubusercontent.com/u/153462940?v=4" alt="Diogo Alves"
             width="100px" >
           <br>
           <sub><b>Diogo Alves</b></sub>
