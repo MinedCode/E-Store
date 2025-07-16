@@ -34,7 +34,8 @@ const ProductAddComponent = styled.div`
 
     & #containerBottom{
         background-color: #1F2937;
-        height: 70vh;
+        height: auto;
+        margin-bottom: 30px;
         border-radius: 10px;
         padding: 20px;
 
@@ -210,7 +211,7 @@ const ProductAdd = () =>{
 
     return(
 
-        <ProductAddComponent id="outlet">
+        <ProductAddComponent>
             <div id="containerTop">
                 <div>
                     <h1>Novo Produto</h1>

@@ -147,7 +147,7 @@ const Products = () =>{
     };
 
     return(
-        <ProductsComponent id="outlet">
+        <ProductsComponent>
             <div>
                 <h1>Produtos</h1>
                 <p>Todos os produtos</p>
