@@ -9,7 +9,7 @@
 
 body{
     background-color: #00000e;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 #outlet{

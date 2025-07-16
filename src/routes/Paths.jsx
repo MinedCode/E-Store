@@ -20,7 +20,6 @@ const Paths = () =>{
                         <Route path="/productedit/:id" element={<ProductEdit/>}/>
                         <Route path="/products" element={<Products/>}/>
                     </Route>
-                    
                     <Route path="/*" element={<NotFound/>}/>
                 </Routes>
             </BrowserRouter>

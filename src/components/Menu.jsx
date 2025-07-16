@@ -74,7 +74,7 @@ const Menu = ({ isOpen }) => {
         <MenuComponent $isOpen={isOpen}>
             <ul>
                 <Link className="navMenu" to="/"><img src={dashboard} alt="Dashborad image" />Dashboard</Link>
-                <Link className="navMenu" to="/products"><img src={produtos} alt="produto image" />Produtos</Link>
+                <Link className="navMenu" to="/products" to="/products"><img src={produtos} alt="produto image" />Produtos</Link>
                 <Link className="navMenu" to="/orders"><img src={carrinho} alt="carrinho image" />Pedidos</Link>
             </ul>
         </MenuComponent>
