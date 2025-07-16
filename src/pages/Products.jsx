@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FaTrashAlt } from "react-icons/fa";
+import DeleteModal from "../components/DeleteModal";
 
 const ProductsComponent = styled.div`
     display: flex;
@@ -98,6 +99,9 @@ const ProductsComponent = styled.div`
 
 const Products = () =>{
     const [produtos, setProdutos] = useState([]);
+    const [produtoSelecionado, setProdutoSelecionado] = useState(null);
+    const [mostrarModal, setMostrarModal] = useState(false);
+
     async function buscarDados() {
         const request = await fetch(`https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos`);
         const dados = await request.json();
@@ -106,9 +110,34 @@ const Products = () =>{
             setProdutos(dados);
         }
     }
+
+
     useEffect(() => {
         buscarDados();
     }, [])
+    
+    const abrirModal = (produto) => {
+        setProdutoSelecionado(produto);
+        setMostrarModal(true);
+    };
+
+    const fecharModal = () => {
+        setProdutoSelecionado(null);
+        setMostrarModal(false);
+    };
+
+    const confirmarExclusao = async () => {
+        try {
+            await fetch(`https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos/${produtoSelecionado.id}`, {
+                method: "DELETE",
+            });
+            setProdutos((produtos) => produtos.filter((p) => p.id !== produtoSelecionado.id));
+            fecharModal();
+            window.location.reload();
+        } catch (error) {
+            console.error("Erro ao excluir produto:", error);
+        }
+    };
 
     return(
         <ProductsComponent id="outlet">
@@ -133,8 +162,16 @@ const Products = () =>{
                             </button>
                         </div>
                     </div>
-                ))}
+                ))}             
             </div>
+            
+            {mostrarModal && (
+                <DeleteModal
+                    productName={produtoSelecionado.nome}
+                    onConfirm={confirmarExclusao}
+                    onCancel={fecharModal}
+                />
+            )}
         </ProductsComponent>
     );
 };

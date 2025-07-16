@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const Page404 = styled.div`
     display: flex;
     justify-content: center;
+    color: white;
     
     & div{
         display: flex;
@@ -39,7 +40,7 @@ const Page404 = styled.div`
 
 const NotFound = () =>{
     return(
-        <Page404 id="outlet">
+        <Page404>
             <div>
                 <img src={alerta} alt="" />
                 <h1>Página não encontrada!</h1>
