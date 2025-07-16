@@ -336,6 +336,17 @@ const DashboardComponent = styled.div`
             font-size: small;
         }
     }
+
+    @media screen and (max-width: 1020px) {
+        & #containerBottom{
+            margin-bottom: 20px;
+            
+            & #pageProdutoContainer{
+                
+                padding: 0;
+            }
+        }
+    }
 `;
 
 const Home = () => {
