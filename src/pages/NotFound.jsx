@@ -5,9 +5,8 @@ import { Link } from "react-router-dom";
 const Page404 = styled.div`
     display: flex;
     justify-content: center;
-    color: white;
     
-    & div{
+    & div {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -15,7 +14,7 @@ const Page404 = styled.div`
         margin-top: 100px;
         gap: 10px;
         
-        & #botaoDashboard{
+        & #botaoDashboard {
             all: unset;
             background-color: #0046b8;
             font-size: 20px;
@@ -30,16 +29,57 @@ const Page404 = styled.div`
             border-radius: 15px;
         }
 
-        & #botaoDashboard:hover{
+        & #botaoDashboard:hover {
             cursor: pointer;
             background-color: #001d4d;
             color: #c7c7c7;
         }
     }
+
+    @media (max-width: 768px) {
+        & div {
+            margin-top: 50px;
+            gap: 5px;
+            text-align: center;
+        }
+        & #botaoDashboard {
+            width: 90%;
+            font-size: 18px;
+            height: 40px;
+        }
+        & img {
+            width: 150px;
+        }
+        & h1 {
+            font-size: 24px;
+        }
+        & p {
+            font-size: 16px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        & div {
+            margin-top: 30px;
+        }
+        & #botaoDashboard {
+            font-size: 16px;
+            height: 35px;
+        }
+        & img {
+            width: 120px;
+        }
+        & h1 {
+            font-size: 20px;
+        }
+        & p {
+            font-size: 14px;
+        }
+    }
 `;
 
-const NotFound = () =>{
-    return(
+const NotFound = () => {
+    return (
         <Page404>
             <div>
                 <img src={alerta} alt="" />

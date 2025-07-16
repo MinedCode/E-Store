@@ -8,17 +8,15 @@ import NotFound from "../pages/NotFound";
 const Paths = () =>{
 
     return(
-
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Layout/>}>
+                    <Route element={<Layout/>}>
                         <Route path="/" element={<Home/>}/>
                         <Route path="/productadd" element={<ProductAdd/>}/>
                         <Route path="/productedit/:id" element={<ProductEdit/>}/>
                         <Route path="/*" element={<NotFound/>}/>
                     </Route>
-                    <Route path="/*" element={<NotFound/>}/>
                 </Routes>
             </BrowserRouter>
         </>
