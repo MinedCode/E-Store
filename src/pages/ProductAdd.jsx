@@ -2,6 +2,8 @@ import styled from "styled-components";
 import uploadImage from "../assets/extras/upload.png";
 import { Link } from "react-router-dom";
 import { useRef, useState} from "react";
+import Modal from "@mui/material/Modal";
+import "./ModalCategory.css"
 
 const ProductAddComponent = styled.div`
     display: flex;
@@ -140,9 +142,14 @@ const ProductAddComponent = styled.div`
 
 const ProductAdd = () =>{
 
-    const inputRef = useRef(null)
+    const inputRef = useRef(null);
     const [preview, setPreview] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
     
+    const fecharmodal = () =>{
+        setOpenModal(false);
+    }
+
     const [form, setForm] = useState({
         imagem: null,
         nome: "",
@@ -185,23 +192,31 @@ const ProductAdd = () =>{
             const dados = await response.json();
             const urlImage = dados.secure_url;
 
-            const novoProduto ={
-                imagem: urlImage,
-                nome: form.nome,
-                preco: form.preco,
-                descricao: form.descricao,
-                categoria: form.categoria,
-                estoque: form.estoque
-            };
+            if(form.categoria == "Nova-Categoria"){
+                //alert("Categoria: " + form.categoria);
+                form.categoria = "furuta categoria"
+                console.log(form.categoria);
+                setOpenModal(true);
+            }else{
 
-            await fetch("https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(novoProduto)
-            });
-
-            alert("Produto salvo com êxito");
-            window.location.reload();
+                const novoProduto ={
+                    imagem: urlImage,
+                    nome: form.nome,
+                    preco: form.preco,
+                    descricao: form.descricao,
+                    categoria: form.categoria,
+                    estoque: form.estoque
+                };
+                
+                await fetch("https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(novoProduto)
+                });
+                
+                alert("Produto salvo com êxito");
+                window.location.reload();
+            }
 
         }catch (err){
             console.log("erro ao salvar os dados: " + err)
@@ -278,6 +293,20 @@ const ProductAdd = () =>{
                                 <option value="Pc-gamer">Pc gamer</option>
                                 <option value="Setup">Setup</option>
                                 <option value="Eletronicos">Eletronicos no geral</option>
+                                <option value="Nova-Categoria">Nova Categoria...</option>
+                               
+                                <Modal open={openModal} id="modalCategory">
+                                    <div id="containerModal">
+                                        <h1>Nova categoria</h1>
+                                        <input type="text" />
+                                        <div id="botoes">
+                                            <button>Salvar</button>
+                                            <button>Ver Categorias</button>
+                                            <button onClick={fecharmodal}>Fechar</button>
+                                        </div>
+                                    </div>
+                                </Modal>
+                                
                             </select>
                         </div>
                         
