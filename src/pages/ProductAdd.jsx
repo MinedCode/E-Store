@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import uploadImage from "../assets/extras/upload.png";
 import { Link } from "react-router-dom";
-import { useRef, useState} from "react";
+import { useEffect, useRef, useState} from "react";
 import Modal from "@mui/material/Modal";
 import "./ModalCategory.css"
 
@@ -138,17 +138,52 @@ const ProductAddComponent = styled.div`
             }
         }
     }
-`;
+    `;
 
 const ProductAdd = () =>{
 
     const inputRef = useRef(null);
     const [preview, setPreview] = useState(null);
     const [openModal, setOpenModal] = useState(false);
+    const [valueModal, setValueModal] = useState("");
+    const [categoryDB, setCategoryDB] = useState([]);
     
+    const handleChange = (e) =>{
+        setValueModal(e.target.value);             
+    }
+    
+    const saveValueModal = async () =>{
+        const category ={
+            name: valueModal
+        }
+        try{
+            await fetch("http://localhost:3000/categorias", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(category)
+            });
+            alert("Categoria Salva com exito!");
+        }catch(error){
+            console.log(`erro: ${error.message}`);
+        }
+    }
+
     const fecharmodal = () =>{
         setOpenModal(false);
     }
+    
+    const getCategory = async () =>{
+        const request = await fetch("http://localhost:3000/categorias");
+        const dados = await request.json();
+
+        if(dados.length > 0){
+            setCategoryDB(dados);
+        }
+    }
+
+    useEffect(() =>{
+        getCategory();
+    }, [])
 
     const [form, setForm] = useState({
         imagem: null,
@@ -158,13 +193,13 @@ const ProductAdd = () =>{
         categoria: "",
         estoque: ""     
     });
-
+    
     const mudarValor = (e) =>{
         const {name, value, type, files} = e.target;
         
         if(type === "file"){
             const file = files[0];
-
+            
             if(file){
                 setPreview(URL.createObjectURL(file));
                 setForm((prev) => ({...prev, [name]: file }));
@@ -173,39 +208,36 @@ const ProductAdd = () =>{
             setForm((prev) => ({...prev, [name]: value }));
         }
     }
-
+    
     const imageClick = () =>{
         inputRef.current.click();
     }
-
+    
     async function addProduto(){
         try{
             const formData = new FormData();
             formData.append("file", form.imagem);
             formData.append("upload_preset", "e-store_presets");
-
+            
             const response = await fetch("https://api.cloudinary.com/v1_1/dqrtfv8rr/image/upload", {
                 method: "POST",
                 body: formData
             });
-
+            
             const dados = await response.json();
             const urlImage = dados.secure_url;
-
+            
             if(form.categoria == "Nova-Categoria"){
-                //alert("Categoria: " + form.categoria);
-                form.categoria = "furuta categoria"
-                console.log(form.categoria);
                 setOpenModal(true);
             }else{
 
                 const novoProduto ={
-                    imagem: urlImage,
-                    nome: form.nome,
-                    preco: form.preco,
-                    descricao: form.descricao,
-                    categoria: form.categoria,
-                    estoque: form.estoque
+                    image_url: urlImage,
+                    name: form.nome,
+                    price: form.preco,
+                    description: form.descricao,
+                    category_id: form.categoria,
+                    stock: form.estoque
                 };
                 
                 await fetch("https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos", {
@@ -217,11 +249,11 @@ const ProductAdd = () =>{
                 alert("Produto salvo com êxito");
                 window.location.reload();
             }
-
+            
         }catch (err){
             console.log("erro ao salvar os dados: " + err)
         }    
-
+        
     }
 
     return(
@@ -288,21 +320,20 @@ const ProductAdd = () =>{
                         <div>
                             <label htmlFor="category">Categoria</label>
                             <select id="category" className="info" name="categoria" required onChange={mudarValor}>
-                                <option value="null">Selecione uma categoria</option>
-                                <option value="Video-game">Video game</option>
-                                <option value="Pc-gamer">Pc gamer</option>
-                                <option value="Setup">Setup</option>
-                                <option value="Eletronicos">Eletronicos no geral</option>
+                                {categoryDB.map((categoria) =>(
+                                    <option value={categoria.name}>{categoria.name} </option>
+                                ))}
                                 <option value="Nova-Categoria">Nova Categoria...</option>
                                
                                 <Modal open={openModal} id="modalCategory">
                                     <div id="containerModal">
                                         <h1>Nova categoria</h1>
-                                        <input type="text" />
+                                        <input type="text" placeholder="Nome da categoria..." onChange={handleChange}/>
+
                                         <div id="botoes">
-                                            <button>Salvar</button>
-                                            <button>Ver Categorias</button>
-                                            <button onClick={fecharmodal}>Fechar</button>
+                                            <button id="salvar" onClick={saveValueModal}>Salvar</button>
+                                            <button id="verCategorias">Ver Categorias</button>
+                                            <button onClick={fecharmodal} id="fecharModal">Fechar</button>
                                         </div>
                                     </div>
                                 </Modal>
