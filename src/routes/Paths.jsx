@@ -6,6 +6,7 @@ import ProductEdit from "../pages/ProductEdit";
 import NotFound from "../pages/NotFound";
 import Products from "../pages/Products";
 import Register from "../pages/Register";
+import Login from "../pages/Login";
 
 
 const Paths = () =>{
@@ -20,6 +21,7 @@ const Paths = () =>{
                         <Route path="/productadd" element={<ProductAdd/>}/>
                         <Route path="/productedit/:id" element={<ProductEdit/>}/>
                         <Route path="/products" element={<Products/>}/>
+                        <Route path="/logins" element={<Login/>}/>
                         <Route path="/registers" element={<Register/>}/>
                     </Route>
                     <Route path="/*" element={<NotFound/>}/>
