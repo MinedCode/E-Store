@@ -6,6 +6,8 @@ import estoqueImage from "../assets/dashboardImages/estoque.png";
 import { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import DeleteModal from "../components/DeleteModal";
+import axios from 'axios'; // 1. Importar o axios
+
 
 const DashboardComponent = styled.div`
     display: flex;
@@ -363,15 +365,25 @@ const Home = () => {
     const [produtoSelecionado, setProdutoSelecionado] = useState(null);
     const [mostrarModal, setMostrarModal] = useState(false);
 
-    async function buscarDados() {
-        const request = await fetch(`https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos`);
-        const dados = await request.json();
-        setTotalProdutos(dados.length);
+    
 
-        if (dados.length >= 4) {
-            setProdutos(dados.slice(-4));
-        } else {
-            setProdutos(dados);
+
+
+
+      async function buscarDados() {
+        try {
+            const response = await axios.get('http://localhost:3000/produtos');
+            const dados = response.data;
+            setTotalProdutos(dados.length);
+
+            // Lógica para mostrar apenas os 4 últimos produtos
+            if (dados.length >= 4) {
+                setProdutos(dados.slice(-4));
+            } else {
+                setProdutos(dados);
+            }
+        } catch (error) {
+            console.error("Erro ao buscar os produtos:", error);
         }
     }
 
@@ -389,13 +401,14 @@ const Home = () => {
         setMostrarModal(false);
     };
 
-    const confirmarExclusao = async () => {
+
+
+ const confirmarExclusao = async () => {
         try {
-            await fetch(`https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos/${produtoSelecionado.id}`, {
-                method: "DELETE",
-            });
+            await axios.delete(`http://localhost:3000/produtos/${produtoSelecionado.id}`);
+
             setProdutos((produtos) => produtos.filter((p) => p.id !== produtoSelecionado.id));
-            setTotalProdutos((prev) => prev - 1);
+            setTotalProdutos((prev) => prev - 1); // Atualiza o total de produtos
             fecharModal();
         } catch (error) {
             console.error("Erro ao excluir produto:", error);
@@ -412,18 +425,7 @@ const Home = () => {
                     <p>Total de Produtos:</p>
                     <h2>{totalProdutos}</h2>
                 </div>
-                
-                <div className="dados">
-                    <img src={vendasImage} alt="" />
-                    <p>Vendas do mês:</p>
-                    <h2>R$ 0</h2>
-                </div>
-                
-                <div className="dados">
-                    <img src={estoqueImage} alt="" />
-                    <p>Estoque:</p>
-                    <h2>0</h2>
-                </div>
+                {/* ... outros cards do dashboard ... */}
             </div>
 
             <div id="containerBottom">
@@ -431,13 +433,17 @@ const Home = () => {
                     <h2>Produtos adicionados recentemente</h2>
                     <Link id="addProduto" to="/productadd">+ Novo Produto</Link>
                 </div>
+       
 
-                <div id="produtos">
+
+
+          <div id="produtos">
+                    {/* 4. Ajustar os nomes dos campos no JSX */}
                     {produtos.map(produto => (
                         <div className="produto" key={produto.id}>
-                            <img src={produto.imagem} alt={produto.nome} />
-                            <h1>{produto.nome}</h1>
-                            <p>R$ {produto.preco}</p>
+                            <img src={produto.image_url} alt={produto.name} />
+                            <h1>{produto.name}</h1>
+                            <p>R$ {produto.price}</p>
                             <div className="botoes">
                                 <Link className="editar" to={`/productedit/${produto.id}`}>Editar</Link>
                                 <button className="remover" onClick={() => abrirModal(produto)}>
@@ -455,7 +461,7 @@ const Home = () => {
 
             {mostrarModal && (
                 <DeleteModal
-                    productName={produtoSelecionado.nome}
+                    productName={produtoSelecionado.name} // 5. Ajustar o nome do produto no modal
                     onConfirm={confirmarExclusao}
                     onCancel={fecharModal}
                 />
@@ -465,3 +471,19 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
