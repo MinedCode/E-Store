@@ -1,70 +1,95 @@
-#modalCategory{
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    #containerModal{
-        color: white;
+#containerModal {
+  background-color: #1F2937; 
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 400px;
+  max-height: 500px;
+  overflow-y: auto;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 
-        padding: 25px;
-        width: 400px;
-        height: auto;
-        background-color: #1F2937;
-        border-radius: 15px;
 
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        justify-content: space-around;
+#containerModal h1 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
 
-        >input{
-            all: unset;
-            background-color: #39414C;
-            height: 32px;
-            border-radius: 10px;
-            padding: 0 10px;
-        }
 
-        >div{
-            display: flex;
-            justify-content: space-between;
+#containerModal input {
+  all: unset;
+  background-color: #39414C;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: #d1d1d1;
+}
 
-            >button{
-                all: unset;
-                height: 32px;
-                width: auto;
-                border-radius: 10px;
-            }
-            >button:hover{
-                color: rgb(218, 218, 218);
-            }
+/* Botões */
+#botoes {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
 
-            #salvar{
-                padding: 0 10px;
-                background-color: rgb(0, 141, 31);
-            }
-            #salvar:hover{
-                cursor: pointer;
-                background-color: rgb(0, 83, 18);
-            }
+#botoes button {
+  all: unset;
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-            #verCategorias{
-                padding: 0 15px;
-                background-color: #39414C;
-            }
-            #verCategorias:hover{
-                cursor: pointer;
-                background-color: #313841;
-            }
+/* Botões individuais */
+#salvar {
+  background-color: #22c55e; 
+  color: #fff;
+}
 
-            #fecharModal{
-                padding: 0 10px;
-                background-color: rgb(197, 6, 6);
-            }
-            #fecharModal:hover{
-                cursor: pointer;
-                background-color: rgb(153, 7, 7);
-            }
-        }
-    }
+#salvar:hover {
+  background-color: #16a34a;
+}
+
+#verCategorias {
+  background-color: #4b5563; 
+  color: #fff;
+}
+
+#verCategorias:hover {
+  background-color: #374151;
+}
+
+#fecharModal {
+  background-color: #ef4444; 
+  color: #fff;
+}
+
+#fecharModal:hover {
+  background-color: #dc2626;
+}
+
+/* Lista de categorias */
+#containerModal ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+#containerModal li {
+  background-color: #39414C;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 8px;
+  color: #fff;
 }

@@ -147,6 +147,18 @@ const ProductAdd = () =>{
     const [openModal, setOpenModal] = useState(false);
     const [valueModal, setValueModal] = useState("");
     const [categoryDB, setCategoryDB] = useState([]);
+
+
+    const [openCategoryModal, setOpenCategoryModal] = useState(false);
+
+    const abrirmodalcategorias = () => {
+    setOpenCategoryModal(true);
+    };
+
+    const fecharCategoryModal = () => {
+    setOpenCategoryModal(false);
+    };
+
     
     const handleChange = (e) =>{
         setValueModal(e.target.value);             
@@ -323,7 +335,13 @@ const ProductAdd = () =>{
                                 {categoryDB.map((categoria) =>(
                                     <option value={categoria.name}>{categoria.name} </option>
                                 ))}
-                                <option value="Nova-Categoria">Nova Categoria...</option>
+                                <option value="Nova-Categoria">Video Game</option>
+                                <option value="Nova-Categoria">Cat01</option>
+                                <option value="Nova-Categoria">Cat02</option>
+                                <option value="Nova-Categoria">Cat03</option>
+                                <option value="Nova-Categoria">Cat04</option>
+
+                                {/* Alterar nomes das categorias */}
                                
                                 <Modal open={openModal} id="modalCategory">
                                     <div id="containerModal">
@@ -332,11 +350,41 @@ const ProductAdd = () =>{
 
                                         <div id="botoes">
                                             <button id="salvar" onClick={saveValueModal}>Salvar</button>
-                                            <button id="verCategorias">Ver Categorias</button>
+                                            <button onClick={abrirmodalcategorias} id="verCategorias">Ver Categorias</button>
+
+                                            {/* Ao clicar, chamar uma função para abrir o seu modal, funçao essa semelhante a fehcarmodal  */}
                                             <button onClick={fecharmodal} id="fecharModal">Fechar</button>
                                         </div>
                                     </div>
                                 </Modal>
+                                <Modal open={openCategoryModal} onClose={fecharCategoryModal}>
+  <div id="containerModal">
+    <h1>Categorias</h1>
+
+    <ul style={{ listStyle: "none", padding: 0 }}>
+      {categoryDB.length > 0 ? (
+        categoryDB.map((categoria, index) => (
+          <li key={index} style={{
+            backgroundColor: "#39414C",
+            margin: "5px 0",
+            padding: "10px",
+            borderRadius: "8px",
+            color: "#fff"
+          }}>
+            {categoria.name}
+          </li>
+        ))
+      ) : (
+        <p style={{ color: "#aaa" }}>Nenhuma categoria cadastrada</p>
+      )}
+    </ul>
+
+    <div id="botoes">
+      <button id="fecharModal" onClick={fecharCategoryModal}>Fechar</button>
+    </div>
+  </div>
+</Modal>
+
                                 
                             </select>
                         </div>
