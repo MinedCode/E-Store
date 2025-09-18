@@ -175,6 +175,9 @@ const ProductAdd = () =>{
                 body: JSON.stringify(category)
             });
             alert("Categoria Salva com exito!");
+            form.categoria = valueModal;
+            addProduto();
+            setOpenModal(false);
         }catch(error){
             console.log(`erro: ${error.message}`);
         }
@@ -242,24 +245,32 @@ const ProductAdd = () =>{
             if(form.categoria == "Nova-Categoria"){
                 setOpenModal(true);
             }else{
+                const dataDB = await fetch(`http://localhost:3000/categorias/nome/${form.categoria}`);
+                const categoryDB = await dataDB.json();
+                const category_id = categoryDB.id;
 
                 const novoProduto ={
                     image_url: urlImage,
                     name: form.nome,
                     price: form.preco,
                     description: form.descricao,
-                    category_id: form.categoria,
+                    category_id: category_id,
                     stock: form.estoque
                 };
                 
-                await fetch("https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(novoProduto)
-                });
-                
-                alert("Produto salvo com êxito");
-                window.location.reload();
+                const nullCheck = Object.values(form).some(value => value == null || value === "" || value == 0);
+
+                if(nullCheck == true){
+                    alert("Preencha todos os campos");
+                }else{
+                    await fetch("https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(novoProduto)
+                    });
+                    alert("Produto salvo com êxito");
+                    window.location.reload();
+                }
             }
             
         }catch (err){
@@ -332,14 +343,11 @@ const ProductAdd = () =>{
                         <div>
                             <label htmlFor="category">Categoria</label>
                             <select id="category" className="info" name="categoria" required onChange={mudarValor}>
+                                <option value="">Selecione uma categoria:</option>
                                 {categoryDB.map((categoria) =>(
                                     <option value={categoria.name}>{categoria.name} </option>
                                 ))}
-                                <option value="Nova-Categoria">Video Game</option>
-                                <option value="Nova-Categoria">Cat01</option>
-                                <option value="Nova-Categoria">Cat02</option>
-                                <option value="Nova-Categoria">Cat03</option>
-                                <option value="Nova-Categoria">Cat04</option>
+                                <option value="Nova-Categoria">Nova categoria...</option>
 
                                 {/* Alterar nomes das categorias */}
                                
