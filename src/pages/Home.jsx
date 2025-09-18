@@ -364,7 +364,7 @@ const Home = () => {
     const [mostrarModal, setMostrarModal] = useState(false);
 
     async function buscarDados() {
-        const request = await fetch(`https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos`);
+        const request = await fetch(`http://localhost:3000/produtos`);
         const dados = await request.json();
         setTotalProdutos(dados.length);
 
@@ -391,7 +391,7 @@ const Home = () => {
 
     const confirmarExclusao = async () => {
         try {
-            await fetch(`https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos/${produtoSelecionado.id}`, {
+            await fetch(`http://localhost:3000/produtos/:id${produtoSelecionado.id}`, {
                 method: "DELETE",
             });
             setProdutos((produtos) => produtos.filter((p) => p.id !== produtoSelecionado.id));
