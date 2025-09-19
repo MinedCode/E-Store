@@ -142,6 +142,7 @@ const ProductEdit = () =>{
     const inputRef = useRef(null);
     const [preview, setPreview] = useState(null);
     const [produto, setProduto] = useState({}); 
+    const [category, setCategory] = useState([]);
     const {id} = useParams();
     
     const [form, setForm] = useState({
@@ -154,17 +155,25 @@ const ProductEdit = () =>{
     });
     
     async function buscarProduto() {
-        const dados = await fetch(`https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos/${id}`);
+        const dados = await fetch(`http://localhost:3000/produtos/${id}`);
         const produtoBuscado = await dados.json();
         setProduto(produtoBuscado);
 
+        const categorysFull = await fetch(`http://localhost:3000/categorias`);
+        const all = await categorysFull.json();
+        setCategory(all);
+
+        const dataDB = await fetch(`http://localhost:3000/categorias/${produtoBuscado.category_id}`);
+        const categoryDB = await dataDB.json();
+        const categoryName = categoryDB.name;
+        
         setForm({
-            imagem: produto.imagem,
-            nome: produtoBuscado.nome,
-            preco: produtoBuscado.preco,
-            descricao: produtoBuscado.descricao,
-            categoria: produtoBuscado.categoria,
-            estoque: produtoBuscado.estoque    
+            imagem: produtoBuscado.image_url,
+            nome: produtoBuscado.name,
+            preco: produtoBuscado.price,
+            descricao: produtoBuscado.description,
+            categoria: categoryName,
+            estoque: parseInt(produtoBuscado.stock)
         })
     }
 
@@ -206,17 +215,20 @@ const ProductEdit = () =>{
                 urlImagem = dados.secure_url;
             }
 
+            const dataCategory = await fetch(`http://localhost:3000/categorias/nome/${form.categoria}`);
+            const categoryByDB = await dataCategory.json();
+            console.log(categoryByDB);
             const updateProduto ={
-                imagem: urlImagem,
-                nome: form.nome,
-                preco: form.preco,
-                descricao: form.descricao,
-                categoria: form.categoria,
-                estoque: form.estoque
+                image_url: urlImagem,
+                name: form.nome,
+                price: parseFloat(form.preco),
+                description: form.descricao,
+                category_id: parseInt(categoryByDB.id),
+                stock: parseInt(form.estoque)
                 
             };
 
-            await fetch(`https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos/${id}`, {
+            await fetch(`http://localhost:3000/produtos/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(updateProduto)
@@ -264,7 +276,7 @@ const ProductEdit = () =>{
                         ):(
                             
                             <img 
-                                src={produto.imagem}
+                                src={produto.image_url}
                                 alt="imagem do produto" 
                                 style={{
                                     width: "100%",
@@ -307,11 +319,10 @@ const ProductEdit = () =>{
                         <div>
                             <label htmlFor="category">Categoria</label>
                             <select id="category" className="info" name="categoria" required onChange={mudarValor} value={form.categoria}>
-                                <option value="null">Selecione uma categoria</option>
-                                <option value="Video-game">Video game</option>
-                                <option value="Pc-gamer">Pc gamer</option>
-                                <option value="Setup">Setup</option>
-                                <option value="Eletronicos">Eletronicos no geral</option>
+                                <option value="null">Selecione uma categoria:</option>
+                                {category.map((categoria) =>(
+                                    <option value={categoria.name}>{categoria.name} </option>
+                                ))}
                             </select>
                         </div>
                         

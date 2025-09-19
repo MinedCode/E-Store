@@ -364,7 +364,7 @@ const Home = () => {
     const [mostrarModal, setMostrarModal] = useState(false);
 
     async function buscarDados() {
-        const request = await fetch(`https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos`);
+        const request = await fetch(`http://localhost:3000/produtos`);
         const dados = await request.json();
         setTotalProdutos(dados.length);
 
@@ -391,7 +391,7 @@ const Home = () => {
 
     const confirmarExclusao = async () => {
         try {
-            await fetch(`https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos/${produtoSelecionado.id}`, {
+            await fetch(`http://localhost:3000/produtos/${produtoSelecionado.id}`, {
                 method: "DELETE",
             });
             setProdutos((produtos) => produtos.filter((p) => p.id !== produtoSelecionado.id));
@@ -435,9 +435,9 @@ const Home = () => {
                 <div id="produtos">
                     {produtos.map(produto => (
                         <div className="produto" key={produto.id}>
-                            <img src={produto.imagem} alt={produto.nome} />
-                            <h1>{produto.nome}</h1>
-                            <p>R$ {produto.preco}</p>
+                            <img src={produto.image_url} alt={produto.name} />
+                            <h1>{produto.name}</h1>
+                            <p>R$ {produto.price}</p>
                             <div className="botoes">
                                 <Link className="editar" to={`/productedit/${produto.id}`}>Editar</Link>
                                 <button className="remover" onClick={() => abrirModal(produto)}>

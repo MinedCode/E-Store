@@ -252,10 +252,10 @@ const ProductAdd = () =>{
                 const novoProduto ={
                     image_url: urlImage,
                     name: form.nome,
-                    price: form.preco,
+                    price: parseFloat(form.preco),
                     description: form.descricao,
                     category_id: category_id,
-                    stock: form.estoque
+                    stock: parseInt(form.estoque)
                 };
                 
                 const nullCheck = Object.values(form).some(value => value == null || value === "" || value == 0);
