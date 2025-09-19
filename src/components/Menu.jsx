@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import dashboard from "../assets/menuImages/dashboard.png";
 import produtos from "../assets/menuImages/produtos.png";
-import carrinho from "../assets/menuImages/carrinho.png";
+import addUser from "../assets/menuImages/add-friend.png";
 import { Link } from "react-router-dom";
 
 const MenuComponent = styled.div`
@@ -75,7 +75,7 @@ const Menu = ({ isOpen }) => {
             <ul>
                 <Link className="navMenu" to="/"><img src={dashboard} alt="Dashborad image" />Dashboard</Link>
                 <Link className="navMenu" to="/products"><img src={produtos} alt="produto image" />Produtos</Link>
-                <Link className="navMenu" to="/orders"><img src={carrinho} alt="carrinho image" />Pedidos</Link>
+                <Link className="navMenu" to="/registers"><img src={addUser} alt="usuario image" />Adicionar usuários</Link>
             </ul>
         </MenuComponent>
     );
