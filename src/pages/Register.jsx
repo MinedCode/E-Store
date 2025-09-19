@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom";
 import "./estilo_register.css";
 
 export default function Cadastro() {
-  const [cpf, setCpf] = useState("");
-  const [nome, setNome] = useState("");
+  const [name, setName] = useState("");
   const [idade, setIdade] = useState("");
   const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const [password, setPassword] = useState("");
   const [mostrarSenha, setMostrarSenha] = useState(false);
 
   const navigate = useNavigate();
@@ -15,10 +14,11 @@ export default function Cadastro() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const dados = { cpf, nome, idade, email, senha };
+    const age = parseInt(idade);
+    const dados = { name, age, email, password };
 
     try {
-      const response = await fetch("http://localhost:3000/cadastro", {
+      const response = await fetch("http://localhost:3000/usuarios", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,25 +42,14 @@ export default function Cadastro() {
       <form className="form-box" id="form-cadastro" onSubmit={handleSubmit}>
         <h1>Criar Conta</h1>
 
-        <label htmlFor="cpf">CPF</label>
-        <input
-          type="text"
-          id="cpf"
-          name="cpf"
-          placeholder="Digite seu CPF"
-          value={cpf}
-          onChange={(e) => setCpf(e.target.value)}
-          required
-        />
-
         <label htmlFor="nome">Nome</label>
         <input
           type="text"
           id="nome"
           name="nome"
           placeholder="Digite seu nome"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           required
         />
 
@@ -93,8 +82,8 @@ export default function Cadastro() {
             id="senha"
             name="senha"
             placeholder="Digite sua senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
           <button
@@ -109,10 +98,6 @@ export default function Cadastro() {
         <button type="submit" className="btn-login">
           Criar conta
         </button>
-
-        <p className="cadastro-link">
-          Já tem uma conta? <a href="/login">Log In</a>
-        </p>
       </form>
     </div>
   );  

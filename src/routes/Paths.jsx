@@ -21,9 +21,9 @@ const Paths = () =>{
                         <Route path="/productadd" element={<ProductAdd/>}/>
                         <Route path="/productedit/:id" element={<ProductEdit/>}/>
                         <Route path="/products" element={<Products/>}/>
-                        <Route path="/logins" element={<Login/>}/>
-                        <Route path="/registers" element={<Register/>}/>
+                        <Route path="/login" element={<Login/>}/>
                     </Route>
+                    <Route path="/registers" element={<Register/>}/>
                     <Route path="/*" element={<NotFound/>}/>
                 </Routes>
             </BrowserRouter>

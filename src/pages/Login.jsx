@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./estilo_login.css"; 
 export default function Login() {
-  const [cpf, setCpf] = useState("");
-  const [senha, setSenha] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setSenha] = useState("");
   const [mostrarSenha, setMostrarSenha] = useState(false);
 
   const navigate = useNavigate();
@@ -18,12 +18,12 @@ export default function Login() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ cpf, senha }),
+        body: JSON.stringify({ email, password }),
       });
 
       if (response.ok) {
         alert("Login realizado com sucesso!");
-        navigate("/dashboard"); 
+        navigate("/"); 
       } else {
         alert("CPF ou senha incorretos");
       }
@@ -37,14 +37,14 @@ export default function Login() {
       <form className="form-box" id="form-login" onSubmit={handleSubmit}>
         <h1>Login</h1>
 
-        <label htmlFor="cpf">CPF</label>
+        <label htmlFor="cpf">Email</label>
         <input
           type="text"
-          id="cpf"
-          name="cpf"
-          placeholder="Digite seu CPF"
-          value={cpf}
-          onChange={(e) => setCpf(e.target.value)}
+          id="email"
+          name="email"
+          placeholder="Digite seu Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
 
@@ -61,7 +61,7 @@ export default function Login() {
             id="senha"
             name="senha"
             placeholder="Digite sua senha"
-            value={senha}
+            value={password}
             onChange={(e) => setSenha(e.target.value)}
             required
           />
