@@ -263,7 +263,7 @@ const ProductAdd = () =>{
                 if(nullCheck == true){
                     alert("Preencha todos os campos");
                 }else{
-                    await fetch("https://6866a33789803950dbb37048.mockapi.io/apiv1/produtos", {
+                    await fetch("http://localhost:3000/produtos", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(novoProduto)
