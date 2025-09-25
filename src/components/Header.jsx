@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import accountPhoto from "../assets/extras/accountPhoto.png";
 import MenuIcon from '@mui/icons-material/Menu';
+import { useEffect, useState } from "react";
 
 const HeaderComponent = styled.div`
     background-color: #1F2937;
@@ -133,6 +133,18 @@ const HeaderComponent = styled.div`
 `;
 
 const Header = ({ toggleMenu }) => {
+    const [user,setUser] = useState({});
+
+    const getUser = async () =>{
+        //OBS: ADAPTAR PARA QUE O SEJA INSTANCIADO ABAIXO O ID DO USUARIO LOGADO
+        const data = await fetch(`http://localhost:3000/usuarios/id`);
+        const dataUser = await data.json();
+        setUser(dataUser);
+    }
+
+    useEffect(() =>{
+        getUser();
+    },[]);
     return (
         <HeaderComponent>
             <div>
@@ -145,10 +157,9 @@ const Header = ({ toggleMenu }) => {
                 <input type="text" placeholder="Buscar..." />
                 <div id="account">
                     <div>
-                        <h2>ADMIN USER</h2>
-                        <p>ADMIN@EMAIL</p>
+                        <h2>{user.name}</h2>
+                        <p>{user.email}</p>
                     </div>
-                    <img src={accountPhoto} alt="profileImage" />
                 </div>
             </div>
         </HeaderComponent>

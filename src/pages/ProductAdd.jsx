@@ -3,7 +3,7 @@ import uploadImage from "../assets/extras/upload.png";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState} from "react";
 import Modal from "@mui/material/Modal";
-import "./ModalCategory.css"
+import "./cssPages/ModalCategory.css"
 
 const ProductAddComponent = styled.div`
     display: flex;

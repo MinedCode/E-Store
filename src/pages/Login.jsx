@@ -1,24 +1,24 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./estilo_login.css"; 
+import "./cssPages/form.css"
+
 export default function Login() {
-  const [cpf, setCpf] = useState("");
-  const [senha, setSenha] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [mostrarSenha, setMostrarSenha] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    
+    const logar = {email, password}
     try {
       const response = await fetch("http://localhost:3000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ cpf, senha }),
+        body: JSON.stringify(logar)
       });
 
       if (response.ok) {
@@ -33,55 +33,43 @@ export default function Login() {
   };
 
   return (
-    <div className="container">
-      <form className="form-box" id="form-login" onSubmit={handleSubmit}>
+    <div className="containerPage">
+      <form className="formPage" onSubmit={handleSubmit}>
         <h1>Login</h1>
 
-        <label htmlFor="cpf">CPF</label>
+        <label htmlFor="email">Email</label>
         <input
           type="text"
-          id="cpf"
-          name="cpf"
-          placeholder="Digite seu CPF"
-          value={cpf}
-          onChange={(e) => setCpf(e.target.value)}
+          id="email"
+          name="email"
+          placeholder="Digite seu Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
 
-        <div className="senha-label">
-          <label htmlFor="senha">Senha</label>
-          <a href="#" className="esqueceu">
-            Esqueceu?
-          </a>
-        </div>
-
-        <div className="senha-box">
+        <label htmlFor="password">Senha</label>
+        <div className="senhaContainer">
           <input
             type={mostrarSenha ? "text" : "password"}
-            id="senha"
-            name="senha"
+            id="password"
+            name="password"
             placeholder="Digite sua senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
           <button
             type="button"
-            className="toggle-senha"
             onClick={() => setMostrarSenha(!mostrarSenha)}
           >
             {mostrarSenha ? "🙈" : "🐵"}
           </button>
         </div>
 
-        <button type="submit" className="btn-login">
+        <button type="submit">
           Login
         </button>
-
-        <p className="cadastro-link">
-          Não tem uma conta?{" "}
-          <a href="/cadastro">Cadastre-se</a>
-        </p>
       </form>
     </div>
   );

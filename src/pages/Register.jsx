@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./estilo_register.css";
+import "./cssPages/form.css"
 
 export default function Cadastro() {
   const [name, setName] = useState("");
@@ -38,66 +38,58 @@ export default function Cadastro() {
   };
 
   return (
-    <div className="container">
-      <form className="form-box" id="form-cadastro" onSubmit={handleSubmit}>
-        <h1>Criar Conta</h1>
-
-        <label htmlFor="nome">Nome</label>
-        <input
-          type="text"
-          id="nome"
-          name="nome"
-          placeholder="Digite seu nome"
+    <div className="containerPage">
+      <form className="formPage" onSubmit={handleSubmit}>
+        <h1>Criar conta</h1>
+        
+        <label htmlFor="name">Nome</label>
+        <input 
+          type="text" 
+          id="name" 
+          placeholder="Informe seu nome"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
         />
 
-        <label htmlFor="idade">Idade</label>
-        <input
-          type="number"
-          id="idade"
-          name="idade"
-          placeholder="Digite sua idade"
+        <label htmlFor="age">Idade</label>
+        <input 
+          type="number" 
+          name="age" 
+          id="age" 
+          placeholder="Informe sua idade"
           value={idade}
           onChange={(e) => setIdade(e.target.value)}
           required
         />
 
         <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Digite seu email"
+        <input 
+          type="email" 
+          name="email" 
+          id="email" 
+          placeholder="Informe seu email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
 
-        <label htmlFor="senha">Senha</label>
-        <div className="senha-box">
-          <input
-            type={mostrarSenha ? "text" : "password"}
-            id="senha"
-            name="senha"
-            placeholder="Digite sua senha"
+        <label htmlFor="password">Senha</label>
+        <div className="senhaContainer">
+          <input 
+            type={mostrarSenha? "text":"password"}
+            id="password" 
+            placeholder="Crie sua senha"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-          />
-          <button
-            type="button"
-            className="toggle-senha"
-            onClick={() => setMostrarSenha(!mostrarSenha)}
-          >
-            {mostrarSenha ? "🙈" : "🐵"}
-          </button>
+            />
+            <button type="button" onClick={() => setMostrarSenha(!mostrarSenha)}>
+              {mostrarSenha? "🙈" : "🐵"}
+            </button>
         </div>
 
-        <button type="submit" className="btn-login">
-          Criar conta
-        </button>
+        <button type="submit">Salvar</button>
       </form>
     </div>
   );  

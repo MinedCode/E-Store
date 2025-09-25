@@ -392,7 +392,7 @@ const Home = () => {
     const confirmarExclusao = async () => {
         try {
             await fetch(`http://localhost:3000/produtos/${produtoSelecionado.id}`, {
-                method: "DELETE",
+                method: "DELETE"
             });
             setProdutos((produtos) => produtos.filter((p) => p.id !== produtoSelecionado.id));
             setTotalProdutos((prev) => prev - 1);
