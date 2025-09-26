@@ -3,87 +3,95 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.formPage{
-    background-color: #1F2937;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: space-between;
-
-    padding: 20px 30px;
-    height: auto;
-    width: 400px;
-    border-radius: 15px;
-
-    color: white;
-
-    h1{
-        margin-bottom: 15px;
-    }
-
-    >label{
-        font-size: larger;
-        color: rgb(199, 199, 199);
-    }
-
-    >input{
-        all: unset;
-        background-color: #39414C;
-        margin-bottom: 10px;
-        margin-top: 5px;
-        padding-left: 5px;
-        height: 35px;
-        width: 99%;
-        border-radius: 10px;
-    }
-
-     .senhaContainer{
-        width: 100%;
+    
+    .formPage{
+        background-color: #1F2937;
         display: flex;
+        flex-direction: column;
+        align-items: start;
         justify-content: space-between;
-        background-color: #39414C;
-        margin-bottom: 10px;
-        margin-top: 5px;
-        padding: 0 5px;
-        height: 35px;
-        width: 100%;
-        border-radius: 10px;
-
-        >input{
-            all: unset;
-            width: 90%;
-        }
-
-        >button{
-            all: unset;
-        }
-
-        >button:hover{
-            cursor: pointer;
+        
+        padding: 20px 30px;
+        height: auto;
+        width: 400px;
+        border-radius: 15px;
+        
+        color: white;
+        
+        h1{
+            margin-bottom: 15px;
         }
         
+        >label{
+            font-size: larger;
+            color: rgb(199, 199, 199);
+        }
+        
+        >input{
+            all: unset;
+            background-color: #39414C;
+            margin-bottom: 10px;
+            margin-top: 5px;
+            padding-left: 5px;
+            height: 35px;
+            width: 99%;
+            border-radius: 10px;
+        }
+        
+        .senhaContainer{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            background-color: #39414C;
+            margin-bottom: 10px;
+            margin-top: 5px;
+            padding: 0 5px;
+            height: 35px;
+            width: 100%;
+            border-radius: 10px;
+            
+            >input{
+                all: unset;
+                width: 90%;
+            }
+            
+            >button{
+                all: unset;
+            }
+            
+            >button:hover{
+                cursor: pointer;
+            }
+            
+        }
+        
+        >button{
+            all: unset;
+            background-color: #16a34a;
+            margin-top: 15px;
+            width: 100%;
+            height: 45px;
+            border-radius: 10px;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            font-size: large;
+        }
+        
+        >button:hover{
+            cursor: pointer;
+            color: rgb(218, 218, 218);
+            background-color: #15863f;
+        }
     }
 
-    >button{
-        all: unset;
-        background-color: #16a34a;
-        margin-top: 15px;
-        width: 100%;
-        height: 45px;
-        border-radius: 10px;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        font-size: large;
-    }
-
-    >button:hover{
-        cursor: pointer;
-        color: rgb(218, 218, 218);
-        background-color: #15863f;
+}
+@media screen and (max-width: 400px) {
+    .containerPage{
+        .formPage{
+            width: 350px;
+        }
     }
 }
