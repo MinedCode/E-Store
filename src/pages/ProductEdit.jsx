@@ -255,7 +255,7 @@ const ProductEdit = () =>{
                     <h1>Editar Produto</h1>
                 </div>
 
-                <Link id="botaoDashboard" to="/">Voltar</Link>
+                <Link id="botaoDashboard" to="/home">Voltar</Link>
             </div>
 
             <div id="containerBottom">

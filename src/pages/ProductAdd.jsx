@@ -288,7 +288,7 @@ const ProductAdd = () =>{
                     <p>Adicione um novo produto</p>
                 </div>
 
-                <Link id="botaoDashboard" to="/">Voltar</Link>
+                <Link id="botaoDashboard" to="/home">Voltar</Link>
             </div>
 
             <div id="containerBottom">
