@@ -18,7 +18,7 @@ const Paths = () =>{
             <BrowserRouter>
                 <Routes>
                     <Route element={<Layout/>}>
-                        <Route path="/" element={<Home/>}/>
+                        <Route path="/home" element={<Home/>}/>
                         <Route path="/productadd" element={<ProductAdd/>}/>
                         <Route path="/productedit/:id" element={<ProductEdit/>}/>
                         <Route path="/products" element={<Products/>}/>

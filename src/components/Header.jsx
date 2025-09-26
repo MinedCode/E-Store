@@ -135,11 +135,9 @@ const HeaderComponent = styled.div`
 const Header = ({ toggleMenu }) => {
     const [user,setUser] = useState({});
 
-    const getUser = async () =>{
-        //OBS: ADAPTAR PARA QUE O SEJA INSTANCIADO ABAIXO O ID DO USUARIO LOGADO
-        const data = await fetch(`http://localhost:3000/usuarios/id`);
-        const dataUser = await data.json();
-        setUser(dataUser);
+    const getUser =  () =>{
+        const dataUser = sessionStorage.getItem("dataUser");
+        setUser(JSON.parse(dataUser));
     }
 
     useEffect(() =>{

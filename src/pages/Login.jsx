@@ -22,8 +22,11 @@ export default function Login() {
       });
 
       if (response.ok) {
+        const data = await response.json();
+        const dataUser = data.user;
+        sessionStorage.setItem("dataUser", JSON.stringify(dataUser));
         alert("Login realizado com sucesso!");
-        navigate("/dashboard"); 
+        navigate("/home"); 
       } else {
         alert("CPF ou senha incorretos");
       }

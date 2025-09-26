@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const UserComponent = styled.body`
@@ -59,20 +59,21 @@ const UserComponent = styled.body`
 
 const User = () =>{
     const [user, setUser] = useState({});
+    const navigate = useNavigate();
     
     const getUser = async () =>{
-        //OBS: ADAPTAR PARA QUE O SEJA INSTANCIADO ABAIXO O ID DO USUARIO LOGADO
-        const data = await fetch(`http://localhost:3000/usuarios/id`);
-        const dataUser = await data.json();
-        setUser(dataUser);
+        const dataUser = sessionStorage.getItem("dataUser");
+        setUser(JSON.parse(dataUser));
     }
     
     const dropUser = async () =>{
         try {
-            await fetch(`http://localhost:3000/usuarios/id`,{
+            await fetch(`http://localhost:3000/usuarios/${user.id}`,{
                 method: "DELETE",
             });
             alert("Conta Deletada");
+            alert("Sessão Expirada");
+            navigate("/login");
         } catch (error) {
             console.log(error.message);
         }
@@ -91,7 +92,7 @@ const User = () =>{
                 <h3 htmlFor="email">Email: {user.email}</h3>
                 <h3>Senha: ********</h3>
                     
-                <Link className="buttonForm" id="newAccount" to="/registers">Cadastrar novo usuário</Link>
+                <Link className="buttonForm" id="newAccount" to="/registers" target="_blank">Cadastrar novo usuário</Link>
                 <Link className="buttonForm" id="deleteAccount" onClick={dropUser}>Deletar esta conta</Link>
             </div>
         </UserComponent>
