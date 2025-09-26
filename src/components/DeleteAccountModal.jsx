@@ -89,7 +89,7 @@ const DeleteAccountModal = ({ onConfirm, onCancel }) => {
         </Text>
         <Buttons>
           <CancelButton onClick={onCancel}>Cancelar</CancelButton>
-          <ConfirmButton onClick={onConfirm}>Excluir Produto</ConfirmButton>
+          <ConfirmButton onClick={onConfirm}>Excluir Conta</ConfirmButton>
         </Buttons>
       </ModalBox>
     </Overlay>
