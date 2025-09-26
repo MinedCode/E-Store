@@ -77,7 +77,7 @@ const ConfirmButton = styled.button`
   }
 `;
 
-const DeleteModal = ({ productName, onConfirm, onCancel }) => {
+const DeleteProductModal = ({ productName, onConfirm, onCancel }) => {
   return (
     <Overlay>
       <ModalBox>
@@ -96,4 +96,4 @@ const DeleteModal = ({ productName, onConfirm, onCancel }) => {
   );
 };
 
-export default DeleteModal;
+export default DeleteProductModal;
