@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FaTrashAlt } from "react-icons/fa";
-import DeleteModal from "../components/DeleteModal";
+import DeleteProductModal from "../components/DeleteProductModal";
 
 const ProductsComponent = styled.div`
     display: flex;
@@ -173,7 +173,7 @@ const Products = () =>{
             </div>
             
             {mostrarModal && (
-                <DeleteModal
+                <DeleteProductModal
                     productName={produtoSelecionado.nome}
                     onConfirm={confirmarExclusao}
                     onCancel={fecharModal}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import DeleteAccountModal from "../components/DeleteAccountModal";
 
 const UserComponent = styled.body`
     height: 85vh;
@@ -59,6 +60,7 @@ const UserComponent = styled.body`
 
 const User = () =>{
     const [user, setUser] = useState({});
+    const [openModal, setOpenModal] = useState(false);
     const navigate = useNavigate();
     
     const getUser = async () =>{
@@ -93,7 +95,13 @@ const User = () =>{
                 <h3>Senha: ********</h3>
                     
                 <Link className="buttonForm" id="newAccount" to="/registers" target="_blank">Cadastrar novo usuário</Link>
-                <Link className="buttonForm" id="deleteAccount" onClick={dropUser}>Deletar esta conta</Link>
+                <Link className="buttonForm" id="deleteAccount" onClick={() => setOpenModal(true)}>Deletar esta conta</Link>
+                {openModal && (
+                    <DeleteAccountModal
+                        onConfirm={dropUser}
+                        onCancel={() => setOpenModal(false)}
+                    />
+                )}
             </div>
         </UserComponent>
     );

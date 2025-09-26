@@ -5,7 +5,7 @@ import vendasImage from "../assets/dashboardImages/vendas.png";
 import estoqueImage from "../assets/dashboardImages/estoque.png";
 import { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
-import DeleteModal from "../components/DeleteModal";
+import DeleteProductModal from "../components/DeleteProductModal";
 
 const DashboardComponent = styled.div`
     display: flex;
@@ -454,7 +454,7 @@ const Home = () => {
             </div>
 
             {mostrarModal && (
-                <DeleteModal
+                <DeleteProductModal
                     productName={produtoSelecionado.nome}
                     onConfirm={confirmarExclusao}
                     onCancel={fecharModal}
