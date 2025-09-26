@@ -86,7 +86,7 @@ const NotFound = () =>{
                 <img src={alerta} alt="" />
                 <h1>Página não encontrada!</h1>
                 <p>A página que voce procura não existe</p>
-                <Link id="botaoDashboard" to="/">Volte ao início</Link>
+                <Link id="botaoDashboard" to="/home">Volte ao início</Link>
             </div>
         </Page404>
     );

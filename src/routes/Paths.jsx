@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Layout from "../layout/Layout";
 import Home from "../pages/Home";
 import ProductAdd from "../pages/ProductAdd";
@@ -17,6 +17,7 @@ const Paths = () =>{
         <>
             <BrowserRouter>
                 <Routes>
+                    <Route path="/" element={<Navigate to="/login" replace />} />
                     <Route element={<Layout/>}>
                         <Route path="/home" element={<Home/>}/>
                         <Route path="/productadd" element={<ProductAdd/>}/>
